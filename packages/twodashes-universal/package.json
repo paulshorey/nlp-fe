@@ -1,0 +1,45 @@
+{
+  "name": "twodashes-universal",
+  "version": "0.5.8",
+  "description": "Universal utility functions for both browser and node (like @lodash, but with more dashes). Mostly \"pure\" functions (sorting ones use [].sort()). Promises, filtering, sorting, combining, text analysis, math, curry, sleep, etc. See also platform specific functions twodashes-node and twodashes-browser.",
+  "private": false,
+  "devDependencies": {
+    "jest-coverage-badges": "^1.1.2",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "jest": "^26.6.3",
+    "node-fetch": "^2.6.1",
+    "rollup": "^2.35.1",
+    "husky": "^4.3.7",
+    "eslint": "^7.17.0",
+    "parcel": "^1.10.3"
+  },
+  "scripts": {
+    "build": "npm run umd",
+    "umd": "rm -rf .parcel-cache && rm -rf umd && mkdir umd && rm -rf umd && parcel build esm/*.js -d umd --public-url .",
+    "test": "jest --coverage && jest-coverage-badges"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm version patch --no-git-tag-version && npm run test && npm run build && git add ."
+    }
+  },
+  "targets": {
+    "app": {
+      "engines": {
+        "browsers": "> 0.75%"
+      }
+    }
+  },
+  "module": "esm/index.js",
+  "main": "cjs/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twodashes/node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twodashes/node/issues"
+  },
+  "homepage": "https://github.com/twodashes/node#readme"
+}

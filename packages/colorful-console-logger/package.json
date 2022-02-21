@@ -1,0 +1,40 @@
+{
+  "name": "colorful-console-logger",
+  "version": "1.1.0",
+  "description": "No dependencies. No setup required. Easily integrate with Cloud logging (LogDNA, etc). Visually group similar types of logs in the terminal. Show a concise file/line trace for each message - so you can actually find where it's originating without looking through the entire codebase.",
+  "private": false,
+  "author": "Paul Shorey <paulshorey.com>",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "build": "rm -rf .parcel-cache && npx parcel build ./src/cconsole.js",
+    "lint": "eslint src --max-warnings=0",
+    "dev": "rm -rf .parcel-cache && npx parcel watch ./src/cconsole.js",
+    "test": "jest --coverage && jest-coverage-badges",
+    "test:watch": "jest --watch --verbose"
+  },
+  "husky": {
+    "hooks": {
+      "xpre-commit": "npm version patch --no-git-tag-version && npm run lint && npm run test && npm run build && git add ."
+    }
+  },
+  "husky-hooks-alt": {
+    "post-commit": "echo '\n\nPUSHING to remote' && git push"
+  },
+  "targets": {
+    "main": false,
+    "app": {
+      "engines": {
+        "browsers": "> 0.75%"
+      }
+    }
+  },
+  "type": "commonjs",
+  "main": "./dist/cconsole.js",
+  "module": "./dist/cconsoleInit.js",
+  "exports": {
+    ".": "./dist/cconsole.js",
+    "./cconsoleInit": "./dist/cconsoleInit.js"
+  }
+}
